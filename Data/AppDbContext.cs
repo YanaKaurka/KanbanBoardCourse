@@ -18,16 +18,9 @@ namespace KanbanBoardCourse.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            // ВНИМАНИЕ: Замени строку подключения на свою!
-            // Если используешь LocalDB:
+
             optionsBuilder.UseSqlServer(@"Server=KOMPUTER\SQLEXPRESS;Database=KanbanDBCourse;Trusted_Connection=True;TrustServerCertificate=True;");
             
-
-            // Если используешь обычный SQL Server: Data Source=KOMPUTER\SQLEXPRESS;Integrated Security=True;Persist Security Info=False;Pooling=False;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=True;Application Name="SQL Server Management Studio";Command Timeout=0
-            // optionsBuilder.UseSqlServer(@"Server=localhost;Database=KanbanDB;Trusted_Connection=True;TrustServerCertificate=True;");
-
-            // Если используешь SQLEXPRESS:
-            // optionsBuilder.UseSqlServer(@"Server=.\SQLEXPRESS;Database=KanbanDB;Trusted_Connection=True;TrustServerCertificate=True;");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -38,12 +31,11 @@ namespace KanbanBoardCourse.Data
                 .HasForeignKey(t => t.CreatorId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            // Связь: Кому назначена задача (МЕНЯЕМ на NoAction!)
             modelBuilder.Entity<Models.Task>()
                 .HasOne(t => t.Assignee)
                 .WithMany(u => u.AssignedTasks)
                 .HasForeignKey(t => t.AssigneeId)
-                .OnDelete(DeleteBehavior.NoAction); // <-- БЫЛО SetNull, СТАЛО NoAction
+                .OnDelete(DeleteBehavior.NoAction); 
 
             base.OnModelCreating(modelBuilder);
         }

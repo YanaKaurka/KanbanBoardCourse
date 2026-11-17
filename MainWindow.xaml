@@ -5,8 +5,53 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KanbanBoardCourse"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+Title="Канбан-доска" Height="600" Width="900"
+        WindowStartupLocation="CenterScreen"
+        Background="#E0E0E0">
 
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <!-- Верхняя панель -->
+            <RowDefinition Height="*"/>
+            <!-- Рабочая область -->
+        </Grid.RowDefinitions>
+
+        <!-- ВЕРХНЯЯ ПАНЕЛЬ -->
+        <Border Grid.Row="0" Background="#F5F5F5" BorderBrush="Gray" BorderThickness="0,0,0,1">
+            <Grid Margin="10,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <!-- Заголовок -->
+                    <ColumnDefinition Width="*"/>
+                    <!-- Пустое место -->
+                    <ColumnDefinition Width="Auto"/>
+                    <!-- Кнопки -->
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0" Text="Доски" FontSize="20" FontWeight="Bold" 
+                           VerticalAlignment="Center" Margin="0,0,20,0"/>
+
+                <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
+                    <Button x:Name="BtnAddBoard" Content="Добавить" Width="100" Height="35" 
+                            Margin="0,0,10,0" Background="#81C784" Foreground="Black" 
+                            FontWeight="SemiBold" Click="BtnAddBoard_Click"/>
+
+                    <Button x:Name="BtnDeleteBoard" Content="Удалить" Width="100" Height="35" 
+                            Background="#E57373" Foreground="Black" 
+                            FontWeight="SemiBold" Click="BtnDeleteBoard_Click"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- РАБОЧАЯ ОБЛАСТЬ (СПИСОК ДОСОК) -->
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Margin="20">
+            <!-- WrapPanel позволяет карточкам переноситься на новую строку, если не влезают -->
+            <WrapPanel x:Name="BoardsPanel" Orientation="Horizontal">
+
+                
+
+            </WrapPanel>
+        </ScrollViewer>
     </Grid>
 </Window>
